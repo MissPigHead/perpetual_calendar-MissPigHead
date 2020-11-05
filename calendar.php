@@ -13,12 +13,26 @@
 </head>
 <body>
 <?php
-    $testDate="2020-02-02"; // 輸入測試日期
+    $testDate="2020-05-20"; // 輸入測試日期
     $testDateYrMn=date("Y-m",strtotime($testDate)); //回傳測試日期該年份及月份
-    $firstDateWeek=date("w",(strtotime($testDateYrMn.'-1'))); // 回傳測試該月第1日星期幾
+    $firstDateWeek=date("w",(strtotime($testDateYrMn.'-1'))); // 回傳測試該月第一日星期幾
     $testMonthDays=date("t",strtotime($testDate)); // 回傳測試該月共幾天
-    $endDateWeek=date("w",(strtotime($testDateYrMn.'-'.$testMonthDays))); // 回傳測試該月最後1日星期幾
+    $endDateWeek=date("w",(strtotime($testDateYrMn.'-'.$testMonthDays))); // 回傳測試該月最後一日星期幾
+
+    $lastMnLastDate=date("Y-m-d",((strtotime($testDateYrMn.'-1'))-24*60*60)); // 回傳前月最後一天日期
+    $lastMnYrMn=date("Y-m",strtotime($lastMnLastDate)); //回傳前月年份及月份
+    $lastMnDays=date("t",strtotime($lastMnLastDate)); //回傳前月共幾天
+    $lastMnFistDtWk=date("w",(strtotime($lastMnYrMn.'-1'))); //回傳前月第一天星期幾
+    $lastMnLastDtWk=date("w",(strtotime($lastMnYrMn.'-'.$lastMnDays))); //回傳前月最後一天星期幾
+    
+    $nextMnFirstDate=date("Y-m-d",((strtotime($testDateYrMn.'-'.$testMonthDays))+24*60*60)); // 回傳次月第一天日期
+    $nextMnYrMn=date("Y-m",strtotime($nextMnFirstDate)); //回傳次月年份及月份
+    $nextMnDays=date("t",strtotime($nextMnFirstDate)); //回傳次月共幾天
+    $nextMnFistDtWk=date("w",(strtotime($nextMnYrMn.'-1'))); //回傳次月第一天星期幾
+    $nextMnLastDtWk=date("w",(strtotime($nextMnYrMn.'-'.$nextMnDays))); //回傳次月最後一天星期幾
 ?>
+
+
     <h1 class="text-center">Calendar</h1>
     <h3 class="text-center"><?php echo $testDateYrMn ?></h3>
     <div class="container">
@@ -57,5 +71,6 @@
             </div>
         </div>
     </div>
+
 </body>
 </html>
