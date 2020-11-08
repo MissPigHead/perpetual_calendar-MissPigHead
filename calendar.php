@@ -21,214 +21,146 @@
 <body onload="ShowTime()">
 
     <?php
-    $calDy=date('d');
-    if (empty($_GET['Yr'])){
-        $calYr=date('Y');
-    }else{
-        $calYr=$_GET['Yr'];
-    }
-    
-    if (empty($_GET['Mn'])){
-        $calMn=date('m');
-    }else{
-        if($_GET['findMn']='-1'){
-            $calMn=$calMn-1;
-        }elseif($_GET['findMn']='+1'){
-            $calMn=$calMn+1;
+        date_default_timezone_set("Asia/Taipei");
+        if (!empty($_GET['Yr'])){
+            $calYr=$_GET['Yr'];
+        }else{
+            $calYr=date('Y');
         }
-    }
-    $calDt=date('d/ F / Y',strtotime($calDy.'-'.$calMn.'-'.$calYr));
-        // $calDt=date('Y / m / d');
-        // $calYr=date('Y'); // 原始'年'
-        // $calMnF=date('F'); // 原始'月'文字
-        // $calMn=date('m'); // 原始'月'數字
-        $calDys=date('t',strtotime($calYr.'-'.$calMn.'-'.$calDy)); // 原始'該月天數'
-        $calWkDy=date('l',strtotime($calDt)); // 原始'星期幾'
-        $firstWkDy=date('w',strtotime($calYr.'-'.$calMn.'-1'));
-        $endWkDy=date('w',strtotime($calYr.'-'.$calMn.'-'.$calDys));
-        echo $calDt.'$calDt </br>';
-        echo $calYr.'$calYr </br>';
-        echo $calMn.'$calMn </br>';
-        echo $calDy.'$calDy </br>';
-        echo $calDys.'$calDys </br>';
-        echo $calWkDy.'$calWkDy </br>';
-        echo $firstWkDy.'$firstWkDy </br>';
-        echo $endWkDy.'$endWkDy </br>';
-    ?>
-
-
+        if (!empty($_GET['Mn'])){
+            $calMn=$_GET['Mn'];
+        }else{
+            $calMn=date('m');
+        }
+        ?>
 
     <div class="container">
         <div class="row pt-4 d-flex justify-content-center">
             <div class="mx-1 col-12 col-lg-7 order-2 order-lg-1 card bg-dark text-light text-center">   
-                    <div class="card-body d-flex flex-column">
-                        <div class="order-2">
-                            <form action="calendar.php" method="get" name="calendar">
-                                <div class="form-row d-flex justify-content-center">
-
-                                    <div class=" order-2 form-group col-md-3 px-1">                            
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">Year</span>
-                                            </div>
-                                            <input type="text" class="form-control" name="Yr">
+                <div class="card-body d-flex flex-column">
+                    <div class="order-2">
+                        <form action="calendar.php" method="get" name="calendar">
+                            <div class="form-row d-flex justify-content-center">
+                                <div class=" order-2 form-group col-md-3 px-1">                            
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Year</span>
                                         </div>
-                                    </div> 
-                                    <div class="order-3 form-group col-md-3">                            
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">Month</span>
-                                            </div>
-                                            <select name="Mn" class="form-control">
-                                                <option value=""> --- </option>
-                                                <option value="1"> 1 </option>
-                                                <option value="2"> 2 </option>
-                                                <option value="3"> 3 </option>
-                                                <option value="4"> 4 </option>
-                                                <option value="5"> 5 </option>
-                                                <option value="6"> 6 </option>
-                                                <option value="7"> 7 </option>
-                                                <option value="8"> 8 </option>
-                                                <option value="9"> 9 </option>
-                                                <option value="10"> 10 </option>
-                                                <option value="11"> 11 </option>
-                                                <option value="12"> 12 </option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="order-4 form-group col-md-1">
-                                        <input type="submit" value="Send" class="btn btn-warning col-12 text-dark" style="font-size: 0.7rem;padding:0.525rem 0.1rem;"></input>
-                                    </div>
-                                    <div class="order-5 form-group col-md-2 ml-2 d-none d-md-block">
-
-                                        <input type="button" class="btn btn-info col-12" style="font-size: 0.7rem;padding:0.525rem 0.1rem;" name="nextMn" value="Next Month">
-                                    </div>
-                                    <div class="order-1 form-group col-md-2 mr-2 d-none d-md-block">
-                                        <button type="submit" class="btn btn-info col-12" style="font-size: 0.7rem;padding:0.525rem 0.1rem;" name="findMn" value="-1">Last Month</button>
-                                        
-
-                                        <?php 
-                                            if (isset($_GET['findMn'])){
-                                                    $calDt=date('m / d / Y',mktime(0,0,0,$calMn+$_GET['findMn'],1,$calYr));     
-                                                    $calYr=date('Y',mktime(0,0,0,$calMn+$_GET['findMn'],1,$calYr));     
-                                                    $calMn=date('m',mktime(0,0,0,$calMn+$_GET['findMn'],1,$calYr));
-                                                    // header("location:calendar.php?Yr=& $calYrMn=&findMn=-1");
-                                                }
-                                                // header("location:calendar.php"); 
-
-
-
-
-                                        //     $calMn=date('m',mktime(0,0,0,$calMn-1,1,$calYr));
-                                        //     $calYr=date('Y',mktime(0,0,0,$calMn-1,1,$calYr));
-                                        //     $calDt=date('Y / m / d',mktime(0,0,0,$calMn-1,1,$calYr));
-                                        //     header("location:calendar.php?Yr={$calYr}&Mn={$calMn}");
-                                        // }elseif (isset($_GET['Yr']) || isset($_GET['Mn'])) {
-                                        //     $calYr=$_GET['Yr'];
-                                        //     $calMn=$_GET['Mn'];
-                                        //     header("location:calendar.php?Yr={$calYr}&Mn={$calMn}");
-                                        // }elseif (isset($_GET['lastMn'])){
-                                        //     $calYr=date('Y',mktime(0,0,0,$_GET['Mn']-1,1,$_GET['Yr']));
-                                        //     $calMn=date('m',mktime(0,0,0,$_GET['Mn']-1,1,$_GET['Yr']));
-                                        //     $calDt=date('Y / m / d',mktime(0,0,0,$calMn,1,$calYr));
-                                        // }
-
-                                        ?>
-
-
-
-                                        <?php 
-                                            $calDys=date('t',strtotime($calYr.'-'.$calMn.'-'.$calDy)); // 原始'該月天數'
-                                            $calWkDy=date('l',strtotime($calDt)); // 原始'星期幾'
-                                            $firstWkDy=date('w',strtotime($calYr.'-'.$calMn.'-1'));
-                                            $endWkDy=date('w',strtotime($calYr.'-'.$calMn.'-'.$calDys));
-                                        
-                                            echo $calDt.'$calDt </br>';
-                                            echo $calYr.'$calYr </br>';
-                                            echo $calMn.'$calMn </br>';
-                                            echo $calDys.'$calDys </br>';
-                                            echo $calWkDy.'$calWkDy </br>';
-                                            echo $firstWkDy.'$firstWkDy </br>';
-                                            echo $endWkDy.'$endWkDy </br>';
-                                    
-?>          
-                                        
-                                        
-
-
+                                        <input type="text" class="form-control" name="Yr">
                                     </div>
                                 </div> 
+                                <div class="order-3 form-group col-md-3">                            
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Month</span>
+                                        </div>
+                                        <select name="Mn" class="form-control">
+                                            <option value=""> --- </option>
+                                            <option value="1"> 1 </option>
+                                            <option value="2"> 2 </option>
+                                            <option value="3"> 3 </option>
+                                            <option value="4"> 4 </option>
+                                            <option value="5"> 5 </option>
+                                            <option value="6"> 6 </option>
+                                            <option value="7"> 7 </option>
+                                            <option value="8"> 8 </option>
+                                            <option value="9"> 9 </option>
+                                            <option value="10"> 10 </option>
+                                            <option value="11"> 11 </option>
+                                            <option value="12"> 12 </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="order-4 form-group col-md-1">
+                                    <input type="submit" value="Send" class="btn btn-warning col-12 text-dark" style="font-size: 0.7rem;padding:0.525rem 0.1rem;"></input>
+                                </div>
+                                <div class="order-5 form-group col-md-2 ml-2 d-none d-md-block">
 
+                                    <input type="button" class="btn btn-info col-12" style="font-size: 0.7rem;padding:0.525rem 0.1rem;" name="FindMn" value="Next Month"
+                                        <?php
+                                                if($calMn==12){
+                                                    $nextMn=1;
+                                                    $nextYr=$calYr+1;
+                                                }else{
+                                                    $nextMn=$calMn+1;
+                                                    $nextYr=$calYr;
+                                                }
+                                            ?>
+                                        onclick="location.href='calendar.php?Yr=<?=$nextYr;?>&Mn=<?=$nextMn;?>'">
 
+                                </div>
+                                <div class="order-1 form-group col-md-2 mr-2 d-none d-md-block">
+                                    <input type="button" class="btn btn-info col-12" style="font-size: 0.7rem;padding:0.525rem 0.1rem;" name="FindMn" value="Last Month"
+                                        <?php
+                                                if($calMn==1){
+                                                    $lastMn=12;
+                                                    $lastYr=$calYr-1;
+                                                }else{
+                                                    $lastMn=$calMn-1;
+                                                    $lastYr=$calYr;
+                                                }
+                                            ?>
+                                    onclick="location.href='calendar.php?Yr=<?=$lastYr;?>&Mn=<?=$lastMn;?>'">
 
-
-
-
-
-
-                            </form>
-                        </div>
-
-                        <div class="card-title order-1">
-                            <h1><?=$calYr.'-'.$calMn;?></h1>
-                        </div>
-
-
-                        <div class="table-responsive order-3" style="border-spacing: 0;">
-                            <table class="table mt-2 ">
-                                <thead class="table-secondary">
-                                    <th class="text-danger">Sun</th>
-                                    <th>Mon</th>
-                                    <th>Tue</th>
-                                    <th>Wed</th>
-                                    <th>Thur</th>
-                                    <th>Fri</th>
-                                    <th class="text-danger">Sat</th>
-                                </thead>
-                                <tbody  class="table bg-white">
-
-
-
-<?php
-        // $calDys=date('t',strtotime($calDt)); // 月曆中 '該月天數'
-        // $firstWkDy=date('w',strtotime(date('Y-m',strtotime($calDt)).'-1'));
-        // $endWkDy=date('w',strtotime(date('Y-m',strtotime($calDt)).'-'.$calDys));
-        for ($i=0; $i<=ceil(($calDys+$firstWkDy-7)/7); $i++){
-            echo "<tr>";
-            for ($j=0; $j<=6; $j++){
-                if (($i==0 && $j<$firstWkDy) ||($i==ceil(($calDys+$firstWkDy-7)/7) && $j>$endWkDy)) {
-                    echo "<td> &nbsp; </td>";
-                }elseif($j==0||$j==6){
-                    echo "<td class='text-danger font-weight-bold'>";
-                    echo ($i*7)+($j+1)-$firstWkDy;
-                    echo "</td>";
-                }else{
-                    echo "<td>";
-                    echo ($i*7)+($j+1)-$firstWkDy;
-                    echo "</td>";
-                }
-            }
-            echo "</tr>";
-        }
-    ?>
-
-
-
-                                </tbody>
-                            </table>
-                        </div>
+                                </div>
+                            </div> 
+                        </form>
                     </div>
+                </div>
+                <div class="card-title order-1">
+                    <h1><?=$calYr.'-'.$calMn;?></h1>
+                </div>
+                <div class="table-responsive order-3" style="border-spacing: 0;">
+                    <table class="table mt-2 ">
+                        <thead class="table-secondary">
+                            <th class="text-danger">Sun</th>
+                            <th>Mon</th>
+                            <th>Tue</th>
+                            <th>Wed</th>
+                            <th>Thur</th>
+                            <th>Fri</th>
+                            <th class="text-danger">Sat</th>
+                        </thead>
+                        <tbody  class="table bg-white">
+                            <?php
+                                    $calDys=date('t',strtotime($calDt)); // 原始'該月天數'
+                                    $firstWkDy=date('w',strtotime($calYr.'-'.$calMn.'-1'));
+                                    $endWkDy=date('w',strtotime($calYr.'-'.$calMn.'-'.$calDys));
+
+                                    for ($i=0; $i<=ceil(($calDys+$firstWkDy-7)/7); $i++){
+                                        echo "<tr>";
+                                        for ($j=0; $j<=6; $j++){
+                                            if (($i==0 && $j<$firstWkDy) ||($i==ceil(($calDys+$firstWkDy-7)/7) && $j>$endWkDy)) {
+                                                echo "<td> &nbsp; </td>";
+                                            }elseif($j==0||$j==6){
+                                                echo "<td class='text-danger font-weight-bold'>";
+                                                echo ($i*7)+($j+1)-$firstWkDy;
+                                                echo "</td>";
+                                            }else{
+                                                echo "<td>";
+                                                echo ($i*7)+($j+1)-$firstWkDy;
+                                                echo "</td>";
+                                            }
+                                        }
+                                        echo "</tr>";
+                                    }
+                                ?>
+
+
+
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <div class="mx-1 col-12 col-lg-4 order-1 order-lg-2 card px-2 bg-light text-center align-self-stretch">
-                    <div class="card-body">
-                        <h5 class="text-muted"><?='Today is '.date('Y / m / d')?></h5>
-                        <h1 class="text-warning"><?=date('l')?></h1>
-                        <h1 class="text-warning"  id="Time"></h1></div>
-                        <!-- <h4 class="text-muted py-4 d-none d-md-block"><?php echo $timezone;?></h4> -->
-                        <img src="https://fakeimg.pl/300x200" div class="card-img d-none d-lg-block">
-                    </div>
-            </div>  
-        </div>
+        <div class="mx-1 col-12 col-lg-4 order-1 order-lg-2 card px-2 bg-light text-center align-self-stretch">
+            <div class="card-body">
+                <h5 class="text-muted"><?='Today is '.date('Y / m / d')?></h5>
+                <h1 class="text-warning"><?=date('l')?></h1>
+                <h1 class="text-warning"  id="Time"></h1></div>
+                <h4 class="text-muted py-4 d-none d-md-block"><?php echo $timezone;?></h4>
+                <img src="https://fakeimg.pl/300x200" div class="card-img d-none d-lg-block">
+            </div>
+        </div>  
     </div>
 </body>
 </html>
