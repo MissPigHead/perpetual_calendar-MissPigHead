@@ -22,6 +22,7 @@
 
     <?php
         date_default_timezone_set("Asia/Taipei");
+        $timezone = date_default_timezone_get();
         if (!empty($_GET['Yr'])){
             $calYr=$_GET['Yr'];
         }else{
@@ -36,81 +37,80 @@
 
     <div class="container">
         <div class="row pt-4 d-flex justify-content-center">
-            <div class="mx-1 col-12 col-lg-7 order-2 order-lg-1 card bg-dark text-light text-center">   
-                <div class="card-body d-flex flex-column">
-                    <div class="order-2">
-                        <form action="calendar.php" method="get" name="calendar">
-                            <div class="form-row d-flex justify-content-center">
-                                <div class=" order-2 form-group col-md-3 px-1">                            
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">Year</span>
-                                        </div>
-                                        <input type="text" class="form-control" name="Yr">
+            <div class="mx-1 col-12 col-lg-7 order-2 order-lg-1 card bg-dark text-light text-center d-flex align-content-center">   
+                <div class="order-2 card-body d-flex">
+                    <form action="calendar.php" method="get" name="calendar">
+                        <div class="form-row d-flex flex-row justify-content-center">
+                            <div class="order-2 form-group col-md-3">                            
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Year</span>
                                     </div>
-                                </div> 
-                                <div class="order-3 form-group col-md-3">                            
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">Month</span>
-                                        </div>
-                                        <select name="Mn" class="form-control">
-                                            <option value=""> --- </option>
-                                            <option value="1"> 1 </option>
-                                            <option value="2"> 2 </option>
-                                            <option value="3"> 3 </option>
-                                            <option value="4"> 4 </option>
-                                            <option value="5"> 5 </option>
-                                            <option value="6"> 6 </option>
-                                            <option value="7"> 7 </option>
-                                            <option value="8"> 8 </option>
-                                            <option value="9"> 9 </option>
-                                            <option value="10"> 10 </option>
-                                            <option value="11"> 11 </option>
-                                            <option value="12"> 12 </option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="order-4 form-group col-md-1">
-                                    <input type="submit" value="Send" class="btn btn-warning col-12 text-dark" style="font-size: 0.7rem;padding:0.525rem 0.1rem;"></input>
-                                </div>
-                                <div class="order-5 form-group col-md-2 ml-2 d-none d-md-block">
-
-                                    <input type="button" class="btn btn-info col-12" style="font-size: 0.7rem;padding:0.525rem 0.1rem;" name="FindMn" value="Next Month"
-                                        <?php
-                                                if($calMn==12){
-                                                    $nextMn=1;
-                                                    $nextYr=$calYr+1;
-                                                }else{
-                                                    $nextMn=$calMn+1;
-                                                    $nextYr=$calYr;
-                                                }
-                                            ?>
-                                        onclick="location.href='calendar.php?Yr=<?=$nextYr;?>&Mn=<?=$nextMn;?>'">
-
-                                </div>
-                                <div class="order-1 form-group col-md-2 mr-2 d-none d-md-block">
-                                    <input type="button" class="btn btn-info col-12" style="font-size: 0.7rem;padding:0.525rem 0.1rem;" name="FindMn" value="Last Month"
-                                        <?php
-                                                if($calMn==1){
-                                                    $lastMn=12;
-                                                    $lastYr=$calYr-1;
-                                                }else{
-                                                    $lastMn=$calMn-1;
-                                                    $lastYr=$calYr;
-                                                }
-                                            ?>
-                                    onclick="location.href='calendar.php?Yr=<?=$lastYr;?>&Mn=<?=$lastMn;?>'">
-
+                                    <input type="text" class="form-control" name="Yr">
                                 </div>
                             </div> 
-                        </form>
-                    </div>
+                            <div class="order-3 form-group col-md-3">                            
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">Month</span>
+                                    </div>
+                                    <select name="Mn" class="form-control">
+                                        <option value=""> --- </option>
+                                        <option value="1"> 1 </option>
+                                        <option value="2"> 2 </option>
+                                        <option value="3"> 3 </option>
+                                        <option value="4"> 4 </option>
+                                        <option value="5"> 5 </option>
+                                        <option value="6"> 6 </option>
+                                        <option value="7"> 7 </option>
+                                        <option value="8"> 8 </option>
+                                        <option value="9"> 9 </option>
+                                        <option value="10"> 10 </option>
+                                        <option value="11"> 11 </option>
+                                        <option value="12"> 12 </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="order-4 form-group col-md-1">
+                                <input type="submit" value="Send" class="btn btn-warning col-12 text-dark" style="font-size: 0.7rem;padding:0.525rem 0.1rem;"></input>
+                            </div>
+                            <div class="order-5 form-group col-md-2 d-none d-md-block">
+
+                                <input type="button" class="btn btn-info col-12" style="font-size: 0.7rem;padding:0.525rem 0.1rem;" name="FindMn" value="Next Month"
+                                    <?php
+                                            if($calMn==12){
+                                                $nextMn=1;
+                                                $nextYr=$calYr+1;
+                                            }else{
+                                                $nextMn=$calMn+1;
+                                                $nextYr=$calYr;
+                                            }
+                                        ?>
+                                    onclick="location.href='calendar.php?Yr=<?=$nextYr;?>&Mn=<?=$nextMn;?>'">
+
+                            </div>
+                            <div class="order-1 form-group col-md-2 d-none d-md-block">
+                                <input type="button" class="btn btn-info col-12" style="font-size: 0.7rem;padding:0.525rem 0.1rem;" name="FindMn" value="Last Month"
+                                    <?php
+                                            if($calMn==1){
+                                                $lastMn=12;
+                                                $lastYr=$calYr-1;
+                                            }else{
+                                                $lastMn=$calMn-1;
+                                                $lastYr=$calYr;
+                                            }
+                                        ?>
+                                onclick="location.href='calendar.php?Yr=<?=$lastYr;?>&Mn=<?=$lastMn;?>'">
+
+                            </div>
+                        </div> 
+                    </form>
                 </div>
-                <div class="card-title order-1">
-                    <h1><?=$calYr.'-'.$calMn;?></h1>
+                <div class="order-1 card-title">
+                    <?php $calMnF=date('F',strtotime($calYr.'-'.$calMn.'-1'));?>
+                    <h1><?=$calYr.'-'.$calMnF;?></h1>
                 </div>
-                <div class="table-responsive order-3" style="border-spacing: 0;">
+                <div class="order-3 table-responsive" style="border-spacing: 0;">
                     <table class="table mt-2 ">
                         <thead class="table-secondary">
                             <th class="text-danger">Sun</th>
@@ -123,7 +123,7 @@
                         </thead>
                         <tbody  class="table bg-white">
                             <?php
-                                    $calDys=date('t',strtotime($calDt)); // 原始'該月天數'
+                                    $calDys=date('t',strtotime($calYr.'-'.$calMn.'-1')); // 原始'該月天數'
                                     $firstWkDy=date('w',strtotime($calYr.'-'.$calMn.'-1'));
                                     $endWkDy=date('w',strtotime($calYr.'-'.$calMn.'-'.$calDys));
 
@@ -156,9 +156,9 @@
             <div class="card-body">
                 <h5 class="text-muted"><?='Today is '.date('Y / m / d')?></h5>
                 <h1 class="text-warning"><?=date('l')?></h1>
-                <h1 class="text-warning"  id="Time"></h1></div>
+                <h1 class="text-warning"  id="Time"></h1>
                 <h4 class="text-muted py-4 d-none d-md-block"><?php echo $timezone;?></h4>
-                <img src="https://fakeimg.pl/300x200" div class="card-img d-none d-lg-block">
+                <img src="https://picsum.photos/300/200" div class="card-img d-none d-lg-block">
             </div>
         </div>  
     </div>
