@@ -55,7 +55,7 @@
 
     <div class="container">
         <div class="row pt-sm-2 pt-lg-5 d-flex justify-content-center">
-            <div class="mx-1 col-12 col-lg-7 order-2 order-lg-1 card bg-dark text-center d-flex">   
+            <div class="mx-1 col-12 col-lg-7 order-2 order-lg-1 card bg-dark text-center d-flex flex-column justify-content-between">   
                 <div class="order-2">
                     <form action="calendar.php" method="get">
                         <div class="form-row d-flex justify-content-center">
@@ -171,12 +171,15 @@
             </div>
         
             <div class="mx-1 col-12 col-lg-4 order-1 order-lg-2 card px-2 bg-light text-center align-self-stretch">
-                <div class="card-body d-flex flex-column">
+                <div class="card-body d-flex flex-column justify-content-between">
                     <h5 class="text-muted pb-1 pb-sm-2 pt-lg-2 pb-lg-4"><?='Today is '.date('Y / m / d')?></h5>
                     <h1 class="text-warning"><?=date('l')?></h1>
                     <h1 class="text-warning"  id="Time"></h1>
                     <h4 class="text-muted pt-2 pt-lg-4 pb-lg-2 d-none d-md-block"><?php echo $timezone;?></h4>
-                    <img src="https://picsum.photos/300/200" div class="card-img d-none d-lg-block">
+                        <?php
+                            $pic=str_pad($calMn, 2, '0', STR_PAD_LEFT).'-'.strval(rand(1,2));
+                        ?>
+                    <img src="300x200/<?=$pic;?>.jpg" div class="card-img d-none d-lg-block">
                 </div>
             </div>
         </div>
