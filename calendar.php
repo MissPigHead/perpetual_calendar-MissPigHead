@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calendar</title>
+    <title>Perpetual Calendar</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -18,26 +18,41 @@
         }
     </script>
     <style>
+        body {
+            height: 100vh;
+            background:linear-gradient(#a8dadc,#cdeae5,#a8dadc) no-repeat;
+        }
         table{
             width: 100%;
             table-layout: fixed;
+            border-spacing: 0;
+        }
+        .title-large{
+            font-size: 3rem;
+            font-weight: 700;
+        }
+        .tdbg:hover{
+            background: #fffaeb;
+            box-shadow: 0 0 3px 3px #f9a410;
         }
         @media(max-width: 575.98px) { 
             .table td, .table th{
                 font-size: 0.9rem;
                 padding: 0.75rem 0.15rem;
             }
+            .title-large{
+                font-size: 2.7rem;
+                font-weight: 700;
+            }
         }
         @media (min-width: 992px) and (max-width: 1199.98px) {
             span.cus, select.cus{
             padding:0.375rem 0.5rem;
             }
-        }
-        
+        } 
     </style>
 </head>
-<body onload="ShowTime()">
-
+<body onload="ShowTime()" class="bodybg">
     <?php
         date_default_timezone_set("Asia/Taipei");
         $timezone = date_default_timezone_get();
@@ -52,7 +67,6 @@
             $calMn=date('m');
         }
         ?>
-
     <div class="container">
         <div class="row pt-sm-2 pt-lg-5 d-flex justify-content-center">
             <div class="mx-1 col-12 col-lg-7 order-2 order-lg-1 card bg-dark text-center d-flex flex-column justify-content-between">   
@@ -104,7 +118,6 @@
                                             }
                                         ?>
                                     onclick="location.href='calendar.php?Yr=<?=$nextYr;?>&Mn=<?=$nextMn;?>'">
-
                             </div>
                             <div class="order-1 form-group col-md-2 mr-md-3 d-none d-md-block">
                                 <input type="button" class="btn btn-info col-12" style="font-size: 0.65rem;padding:0.55rem 0.1rem;" value="< Last Month"
@@ -118,16 +131,15 @@
                                             }
                                         ?>
                                 onclick="location.href='calendar.php?Yr=<?=$lastYr;?>&Mn=<?=$lastMn;?>'">
-
                             </div>
                         </div> 
                     </form>
                 </div>
                 <div class="order-1">
                     <?php $calMnF=date('F',strtotime($calYr.'-'.$calMn.'-1'));?>
-                    <h1 class="card-body card-title text-white font-weight-bold"><?=$calYr.'&nbsp;&nbsp;'.$calMnF;?></h1>
+                    <h1 class="card-body card-title text-white title-large"><?=$calYr.'&nbsp;&nbsp;'.$calMnF;?></h1>
                 </div>
-                <div class="order-3 table-responsive" style="border-spacing: 0;">
+                <div class="order-3 table-responsive">
                     <table class="table mt-2 ">
                         <thead class="table-secondary">
                             <th class="text-danger">Sun</th>
@@ -150,11 +162,11 @@
                                             if (($i==0 && $j<$firstWkDy) ||($i==ceil(($calDys+$firstWkDy-7)/7) && $j>$endWkDy)) {
                                                 echo "<td> &nbsp; </td>";
                                             }elseif($j==0||$j==6){
-                                                echo "<td class='text-danger font-weight-bold'>";
+                                                echo "<td class='text-danger font-weight-bold tdbg'>";
                                                 echo ($i*7)+($j+1)-$firstWkDy;
                                                 echo "</td>";
                                             }else{
-                                                echo "<td>";
+                                                echo "<td class='tdbg'>";
                                                 echo ($i*7)+($j+1)-$firstWkDy;
                                                 echo "</td>";
                                             }
