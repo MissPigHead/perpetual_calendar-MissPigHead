@@ -17,6 +17,24 @@
         　  setTimeout('ShowTime()',1000);
         }
     </script>
+    <style>
+        table{
+            width: 100%;
+            table-layout: fixed;
+        }
+        @media(max-width: 575.98px) { 
+            .table td, .table th{
+                font-size: 0.9rem;
+                padding: 0.75rem 0.15rem;
+            }
+        }
+        @media (min-width: 992px) and (max-width: 1199.98px) {
+            span.cus, select.cus{
+            padding:0.375rem 0.5rem;
+            }
+        }
+        
+    </style>
 </head>
 <body onload="ShowTime()">
 
@@ -36,15 +54,15 @@
         ?>
 
     <div class="container">
-        <div class="row pt-4 d-flex justify-content-center">
-            <div class="mx-1 col-12 col-lg-7 order-2 order-lg-1 card bg-dark text-light text-center d-flex align-content-center">   
-                <div class="order-2 card-body d-flex">
-                    <form action="calendar.php" method="get" name="calendar">
-                        <div class="form-row d-flex flex-row justify-content-center">
+        <div class="row pt-sm-2 pt-lg-5 d-flex justify-content-center">
+            <div class="mx-1 col-12 col-lg-7 order-2 order-lg-1 card bg-dark text-center d-flex">   
+                <div class="order-2">
+                    <form action="calendar.php" method="get">
+                        <div class="form-row d-flex justify-content-center">
                             <div class="order-2 form-group col-md-3">                            
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text">Year</span>
+                                        <span class="input-group-text cus">Year</span>
                                     </div>
                                     <input type="text" class="form-control" name="Yr">
                                 </div>
@@ -52,9 +70,9 @@
                             <div class="order-3 form-group col-md-3">                            
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text">Month</span>
+                                        <span class="input-group-text cus">Month</span>
                                     </div>
-                                    <select name="Mn" class="form-control">
+                                    <select name="Mn" class="form-control cus">
                                         <option value=""> --- </option>
                                         <option value="1"> 1 </option>
                                         <option value="2"> 2 </option>
@@ -74,9 +92,8 @@
                             <div class="order-4 form-group col-md-1">
                                 <input type="submit" value="Send" class="btn btn-warning col-12 text-dark" style="font-size: 0.7rem;padding:0.525rem 0.1rem;"></input>
                             </div>
-                            <div class="order-5 form-group col-md-2 d-none d-md-block">
-
-                                <input type="button" class="btn btn-info col-12" style="font-size: 0.7rem;padding:0.525rem 0.1rem;" name="FindMn" value="Next Month"
+                            <div class="order-5 form-group col-md-2 ml-md-3 d-none d-md-block">
+                                <input type="button" class="btn btn-info col-12" style="font-size: 0.65rem;padding:0.55rem 0.1rem;" value="Next Month >"
                                     <?php
                                             if($calMn==12){
                                                 $nextMn=1;
@@ -89,8 +106,8 @@
                                     onclick="location.href='calendar.php?Yr=<?=$nextYr;?>&Mn=<?=$nextMn;?>'">
 
                             </div>
-                            <div class="order-1 form-group col-md-2 d-none d-md-block">
-                                <input type="button" class="btn btn-info col-12" style="font-size: 0.7rem;padding:0.525rem 0.1rem;" name="FindMn" value="Last Month"
+                            <div class="order-1 form-group col-md-2 mr-md-3 d-none d-md-block">
+                                <input type="button" class="btn btn-info col-12" style="font-size: 0.65rem;padding:0.55rem 0.1rem;" value="< Last Month"
                                     <?php
                                             if($calMn==1){
                                                 $lastMn=12;
@@ -106,9 +123,9 @@
                         </div> 
                     </form>
                 </div>
-                <div class="order-1 card-title">
+                <div class="order-1">
                     <?php $calMnF=date('F',strtotime($calYr.'-'.$calMn.'-1'));?>
-                    <h1><?=$calYr.'-'.$calMnF;?></h1>
+                    <h1 class="card-body card-title text-white font-weight-bold"><?=$calYr.'&nbsp;&nbsp;'.$calMnF;?></h1>
                 </div>
                 <div class="order-3 table-responsive" style="border-spacing: 0;">
                     <table class="table mt-2 ">
@@ -152,15 +169,17 @@
                     </table>
                 </div>
             </div>
-        <div class="mx-1 col-12 col-lg-4 order-1 order-lg-2 card px-2 bg-light text-center align-self-stretch">
-            <div class="card-body">
-                <h5 class="text-muted"><?='Today is '.date('Y / m / d')?></h5>
-                <h1 class="text-warning"><?=date('l')?></h1>
-                <h1 class="text-warning"  id="Time"></h1>
-                <h4 class="text-muted py-4 d-none d-md-block"><?php echo $timezone;?></h4>
-                <img src="https://picsum.photos/300/200" div class="card-img d-none d-lg-block">
+        
+            <div class="mx-1 col-12 col-lg-4 order-1 order-lg-2 card px-2 bg-light text-center align-self-stretch">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="text-muted pb-1 pb-sm-2 pt-lg-2 pb-lg-4"><?='Today is '.date('Y / m / d')?></h5>
+                    <h1 class="text-warning"><?=date('l')?></h1>
+                    <h1 class="text-warning"  id="Time"></h1>
+                    <h4 class="text-muted pt-2 pt-lg-4 pb-lg-2 d-none d-md-block"><?php echo $timezone;?></h4>
+                    <img src="https://picsum.photos/300/200" div class="card-img d-none d-lg-block">
+                </div>
             </div>
-        </div>  
+        </div>
     </div>
 </body>
 </html>
