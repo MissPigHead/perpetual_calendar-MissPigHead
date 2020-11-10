@@ -28,21 +28,57 @@
             border-spacing: 0;
         }
         .title-large{
-            font-size: 3rem;
+            font-size: 3.2rem;
             font-weight: 700;
         }
         .tdbg:hover{
-            background: #fffaeb;
-            box-shadow: 0 0 3px 3px #f9a410;
+            background: #f8f9fa;
+            box-shadow: 0 0 3px 3px #ced4da;
+        }
+        .table td{
+            padding: 1rem 0.75rem;
+            vertical-align: middle;
+        }
+        .tdHolidays{
+            font-size: 0.9rem;
+            font-weight: 600;
+            line-height: 1.1rem;
+            background: #ffd9da;
+            padding: 0.15rem 0.1rem !important;
+        }
+        .tdToday{
+            font-weight: 900;
+            background: #fff8e8;
+            box-shadow: inset 0 0 3px 3px #ffe082   !important;
+        }
+        .tdHolidays:hover{
+            background: #ffb5a9;
+            box-shadow:  0 0 3px 3px #ffe082;
         }
         @media(max-width: 575.98px) { 
-            .table td, .table th{
+            .table th{
+                font-size: 0.9rem;
+                padding: 0.6rem 0.15rem;
+            }
+            .table td{
                 font-size: 0.9rem;
                 padding: 0.75rem 0.15rem;
             }
             .title-large{
-                font-size: 2.7rem;
+                font-size: 2.8rem;
                 font-weight: 700;
+            }
+            .tdHolidays{
+                font-size: 0.8rem;
+                line-height: 0.9rem;
+                padding: 0.1rem 0.05rem !important;
+            }
+        }
+        @media (min-width: 576px) and (max-width: 767.98px){
+            .tdHolidays{
+                font-size: 0.85rem;
+                line-height: 1rem;
+                padding: 0.1rem 0.05rem !important;
             }
         }
         @media (min-width: 992px) and (max-width: 1199.98px) {
@@ -73,7 +109,7 @@
                 <div class="order-2">
                     <form action="calendar.php" method="get">
                         <div class="form-row d-flex justify-content-center">
-                            <div class="order-2 form-group col-md-3">                            
+                            <div class="order-2 form-group col-md-3 mb-2">                            
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text cus">Year</span>
@@ -81,7 +117,7 @@
                                     <input type="text" class="form-control" name="Yr">
                                 </div>
                             </div> 
-                            <div class="order-3 form-group col-md-3">                            
+                            <div class="order-3 form-group col-md-3 mb-2">                            
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text cus">Month</span>
@@ -103,10 +139,10 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="order-4 form-group col-md-1">
+                            <div class="order-4 form-group col-md-1 mb-2">
                                 <input type="submit" value="Send" class="btn btn-warning col-12 text-dark" style="font-size: 0.7rem;padding:0.525rem 0.1rem;"></input>
                             </div>
-                            <div class="order-5 form-group col-md-2 ml-md-3 d-none d-md-block">
+                            <div class="order-5 form-group col-md-2 ml-md-3 d-none d-md-block mb-2">
                                 <input type="button" class="btn btn-info col-12" style="font-size: 0.65rem;padding:0.55rem 0.1rem;" value="Next Month >"
                                     <?php
                                             if($calMn==12){
@@ -118,8 +154,8 @@
                                             }
                                         ?>
                                     onclick="location.href='calendar.php?Yr=<?=$nextYr;?>&Mn=<?=$nextMn;?>'">
-                            </div>
-                            <div class="order-1 form-group col-md-2 mr-md-3 d-none d-md-block">
+                            </div> 
+                            <div class="order-1 form-group col-md-2 mr-md-3 d-none d-md-block mb-2">
                                 <input type="button" class="btn btn-info col-12" style="font-size: 0.65rem;padding:0.55rem 0.1rem;" value="< Last Month"
                                     <?php
                                             if($calMn==1){
@@ -152,6 +188,24 @@
                         </thead>
                         <tbody  class="table bg-white">
                             <?php
+                                    
+                                    
+                                    $holidays=[
+                                        '1-1' => 'New Year\'s Day',
+                                        '2-14' => 'Valentine\'s Day',
+                                        '3-8' => 'Women\'s Day',
+                                        '4-11' => 'Pet Day',
+                                        '4-22' => 'Earth Day',
+                                        '5-1' => 'Labor Day',
+                                        '6-8' => 'World Oceans Day',
+                                        '8-8' => 'Father\'s Day',
+                                        '9-28' => 'Teacher\'s Day',
+                                        '10-10' => 'National Day',
+                                        '11-11' => 'Shopping Day',
+                                        '12-25' => 'Merry Chrismax'
+                                    ]; // 未加母親節
+
+
                                     $calDys=date('t',strtotime($calYr.'-'.$calMn.'-1')); // 原始'該月天數'
                                     $firstWkDy=date('w',strtotime($calYr.'-'.$calMn.'-1'));
                                     $endWkDy=date('w',strtotime($calYr.'-'.$calMn.'-'.$calDys));
@@ -159,15 +213,36 @@
                                     for ($i=0; $i<=ceil(($calDys+$firstWkDy-7)/7); $i++){
                                         echo "<tr>";
                                         for ($j=0; $j<=6; $j++){
+
+                                            $calDate=($i*7)+($j+1)-$firstWkDy;
+
+                                            if(isset($holidays[$calMn.'-'.$calDate])){
+                                                $tdDate=($i*7)+($j+1)-$firstWkDy.'</br>'.$holidays["$calMn-$calDate"];
+                                                $tdClass="tdHolidays";
+                                            }else{
+                                                $tdDate=$calDate;
+                                                $tdClass="";
+                                            }
+
+// if() for Mother's Day
+                                            if((($i==2 && $firstWkDy>0) or ($i==1 && $firstWkDy==0)) && $j==0 && $calMn==5){
+                                                $tdDate=($i*7)+($j+1)-$firstWkDy."</br>Mother\'s Day";
+                                                $tdClass="tdHolidays";
+                                            } // only for Mother's Day
+// if() for today
+                                            if($calDate==date('d') && $calMn==date('m')){
+                                                $tdClass="tdToday";
+                                            } // only for Today
+
                                             if (($i==0 && $j<$firstWkDy) ||($i==ceil(($calDys+$firstWkDy-7)/7) && $j>$endWkDy)) {
                                                 echo "<td> &nbsp; </td>";
                                             }elseif($j==0||$j==6){
-                                                echo "<td class='text-danger font-weight-bold tdbg'>";
-                                                echo ($i*7)+($j+1)-$firstWkDy;
+                                                echo "<td class=\"text-danger $tdClass font-weight-bold tdbg\">";
+                                                echo $tdDate;
                                                 echo "</td>";
                                             }else{
-                                                echo "<td class='tdbg'>";
-                                                echo ($i*7)+($j+1)-$firstWkDy;
+                                                echo "<td class='tdbg $tdClass'>";
+                                                echo $tdDate;
                                                 echo "</td>";
                                             }
                                         }
@@ -184,14 +259,18 @@
         
             <div class="mx-1 col-12 col-lg-4 order-1 order-lg-2 card px-2 bg-light text-center align-self-stretch">
                 <div class="card-body d-flex flex-column justify-content-between">
-                    <h5 class="text-muted pb-1 pb-sm-2 pt-lg-2 pb-lg-4"><?='Today is '.date('Y / m / d')?></h5>
-                    <h1 class="text-warning"><?=date('l')?></h1>
-                    <h1 class="text-warning"  id="Time"></h1>
-                    <h4 class="text-muted pt-2 pt-lg-4 pb-lg-2 d-none d-md-block"><?php echo $timezone;?></h4>
+                    <h5 class="text-muted pt-lg-2"><?='Today is '.date('Y / m / d')?></h5>
+                    <div>
+                        <h1 class="text-warning"><?=date('l')?></h1>
+                        <h1 class="text-warning"  id="Time"></h1>
+                    </div>
+                    <div>
+                    <h5 class="text-muted py-lg-2 d-none d-md-block"><?php echo $timezone;?></h5>
                         <?php
                             $pic=str_pad($calMn, 2, '0', STR_PAD_LEFT).'-'.strval(rand(1,2));
                         ?>
-                    <img src="300x200/<?=$pic;?>.jpg" div class="card-img d-none d-lg-block">
+                        <img src="300x200/<?=$pic;?>.jpg" div class="card-img d-none d-lg-block">
+                    </div>
                 </div>
             </div>
         </div>
