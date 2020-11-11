@@ -269,7 +269,7 @@
                         <?php
                             $pic=str_pad($calMn, 2, '0', STR_PAD_LEFT).'-'.strval(rand(1,2));
                         ?>
-                        <img src="300x200/<?=$pic;?>.jpg" div class="card-img d-none d-lg-block">
+                        <img src="images/300x200/<?=$pic;?>.jpg" div class="card-img d-none d-lg-block">
                     </div>
                 </div>
             </div>
