@@ -321,10 +321,10 @@
                 </div>
             </div>
             <div class="card bgSecBlock col-12 col-lg-4 order-1 order-lg-2 align-self-stretch d-flex justify-content-between align-items-center">
-                <p class="card-body text-warning clock"  id="Time"></p>
+                <p class="card-body text-warning clock mt-lg-2"  id="Time"></p>
 
 
-                <div class="m-3">
+                <div class="m-2">
                     <div class="nav nav-tabs" id="myTab" role="tablist">
                         <div class="nav-item" role="presentation">
                             <a class="nav-link motto-1" id="motto-tab" data-toggle="tab" href="#motto" role="tab" aria-controls="home" aria-selected="true">Want some food for thought?</a>
@@ -346,7 +346,7 @@
                                 // $randNum=rand(1,50);
                                 ?>
                             <blockquote class="blockquote motto-2">
-                                <p class="">
+                                <p>
                                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo, sunt.</p>
                                 <footer class="blockquote-footer motto-3 text-right"><cite title="Source Title">TestOne</cite></footer>
                             </blockquote>
@@ -354,7 +354,7 @@
                     </div>
                 </div>
                 <?php $pic=str_pad($calMn, 2, '0', STR_PAD_LEFT).'-'.strval(rand(1,2));?>
-                <img src="300x200/<?=$pic;?>.jpg" class="rounded m-3 d-none d-lg-block">
+                <img src="images/300x200/<?=$pic;?>.jpg" class="rounded m-3 d-none d-lg-block">
             </div>
         </div>
     </div>
