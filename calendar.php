@@ -114,7 +114,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text cus">Year</span>
                                     </div>
-                                    <input type="text" class="form-control" name="Yr">
+                                    <input type="number" min="0" max="10000" class="form-control" name="Yr" value="<?= $calYr;?>">
                                 </div>
                             </div> 
                             <div class="order-3 form-group col-md-3 mb-2">                            
@@ -226,7 +226,7 @@
 
 // if() for Mother's Day
                                             if((($i==2 && $firstWkDy>0) or ($i==1 && $firstWkDy==0)) && $j==0 && $calMn==5){
-                                                $tdDate=($i*7)+($j+1)-$firstWkDy."</br>Mother\'s Day";
+                                                $tdDate=($i*7)+($j+1)-$firstWkDy."</br>Mother's Day";
                                                 $tdClass="tdHolidays";
                                             } // only for Mother's Day
 // if() for today
