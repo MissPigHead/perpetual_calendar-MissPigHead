@@ -20,6 +20,13 @@
             }
         </script>
     <style>
+        body{
+            background-image: url(images/body.jpg);
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+            background-size: cover;
+            }
         table{
             width: 100%;
             table-layout: fixed;
@@ -32,7 +39,7 @@
         }
         .clock{
             font-family: 'Ubuntu', sans-serif;
-            font-size: 2.5rem;            
+            font-size: 2.5rem;          
         }
         .btn-icon-cus{
             font-size: 2rem;
@@ -149,7 +156,7 @@
     </style>
 </head>
 <body onload="ShowTime()">
-    <?php
+<?php
         if (!empty($_GET['Yr'])){
             $calYr=$_GET['Yr'];
         }else{
@@ -346,7 +353,7 @@
                         </div>
                     </div>
                 </div>
-                <?php $pic=str_pad($calMn, 2, '0', STR_PAD_LEFT).'-'.strval(rand(1,3));?>
+                <?php $pic=str_pad($calMn, 2, '0', STR_PAD_LEFT).'-'.strval(rand(1,2));?>
                 <img src="300x200/<?=$pic;?>.jpg" class="rounded m-3 d-none d-lg-block">
             </div>
         </div>
