@@ -5,11 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perpetual Calendar</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Ubuntu:wght@700&display=swap" rel="stylesheet">
-    <!-- <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet"> -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
-
-
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Nothing+You+Could+Do&family=Homemade+Apple&family=Caveat:wght@500&family=Bebas+Neue&family=Ubuntu:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -31,7 +27,7 @@
         }
         .h1XL{
             font-family: 'Ubuntu', sans-serif;
-            font-size: 3.2rem;
+            font-size: 3.6rem;
             color: #fff;
         }
         .clock{
@@ -48,7 +44,12 @@
             border-color: #17a2b8;
             padding: 0.1rem;
         }
-
+        .hint::after{
+            content: 'please input';
+            color: rgba(0,5,10,50%);
+            position: absolute;
+            /* z-index: 1; */
+        }
         .table th{
             text-align: center;
             background: #75cbd9;
@@ -102,7 +103,19 @@
         .bgSecBlock{
             background: rgb(220, 239, 239);
         }
-
+        .motto-1{
+            font-family: 'Nanum Pen Script', cursive;
+            font-size: 1.2rem;
+            background: transparent;
+        }
+        .motto-2{
+            font-family: 'Caveat', cursive;
+            font-size: 1.6rem;
+        }
+        .motto-3{
+            font-family: 'Homemade Apple', cursive;
+            font-size: 0.8rem;
+        }
         @media(max-width: 575.98px) { 
             .table th, .table td{
                 font-size: 0.85rem;
@@ -158,8 +171,8 @@
                                 <div class="input-group order-1 order-md-2 col-12 col-md-3 my-2">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">Year</span>
-                                    </div><span class="inputHere"></span>
-                                    <input type="number" min="0" max="10000" class="form-control" name="Yr" value="<?= $calYr;?>">
+                                    </div>
+                                    <input type="number" min="0" max="10000" class="form-control" name="Yr">
                                 </div>
                                 <div class="input-group order-2 order-md-3 col-12 col-md-3 my-2">
                                     <div class="input-group-prepend">
@@ -302,35 +315,38 @@
             </div>
             <div class="card bgSecBlock col-12 col-lg-4 order-1 order-lg-2 align-self-stretch d-flex justify-content-between align-items-center">
                 <p class="card-body text-warning clock"  id="Time"></p>
-                <div class="card-body text-info">
+
+
+                <div class="m-3">
                     <div class="nav nav-tabs" id="myTab" role="tablist">
                         <div class="nav-item" role="presentation">
-                            <a class="nav-link" id="motto-tab" data-toggle="tab" href="#motto" role="tab" aria-controls="home" aria-selected="true">Want some food for thought?</a>
+                            <a class="nav-link motto-1" id="motto-tab" data-toggle="tab" href="#motto" role="tab" aria-controls="home" aria-selected="true">Want some food for thought?</a>
                         </div>
                     </div>
                     <div class="tab-content">
                         <div class="tab-pane" id="motto" role="tabpanel" aria-labelledby="motto-tab">
                             <?php
-                                $dsn="mysql:host=localhost;dbname=motto;charset=utf8";
-                                $pdo= new PDO($dsn,'root','');
+                                // $dsn="mysql:host=localhost;dbname=motto;charset=utf8";
+                                // $pdo= new PDO($dsn,'root','');
 
-                                $mottos=$pdo -> query("select * from motto") -> fetchAll(PDO::FETCH_NUM);
-                                $saying[]='';
-                                $person[]='';
-                                foreach ($mottos as $motto){
-                                    $saying[]=$motto['1'];
-                                    $person[]=$motto['2'];
-                                }
-                                $randNum=rand(1,50);
+                                // $mottos=$pdo -> query("select * from motto") -> fetchAll(PDO::FETCH_NUM);
+                                // $saying[]='';
+                                // $person[]='';
+                                // foreach ($mottos as $motto){
+                                //     $saying[]=$motto['1'];
+                                //     $person[]=$motto['2'];
+                                // }
+                                // $randNum=rand(1,50);
                                 ?>
-                            <blockquote class="blockquote">
-                                <p class="mb-0"><?= $saying[$randNum];?></p>
-                                <footer class="blockquote-footer text-right"><cite title="Source Title"><?= $person[$randNum];?></cite></footer>
+                            <blockquote class="blockquote motto-2">
+                                <p class="">
+                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo, sunt.</p>
+                                <footer class="blockquote-footer motto-3 text-right"><cite title="Source Title">TestOne</cite></footer>
                             </blockquote>
                         </div>
                     </div>
                 </div>
-                <?php $pic=str_pad($calMn, 2, '0', STR_PAD_LEFT).'-'.strval(rand(1,3)); ?>
+                <?php $pic=str_pad($calMn, 2, '0', STR_PAD_LEFT).'-'.strval(rand(1,3));?>
                 <img src="300x200/<?=$pic;?>.jpg" class="rounded m-3 d-none d-lg-block">
             </div>
         </div>
