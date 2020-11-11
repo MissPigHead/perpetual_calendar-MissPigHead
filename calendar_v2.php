@@ -4,8 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perpetual Calendar</title>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -18,8 +21,15 @@
             document.getElementById('Time').innerHTML = hr+' : '+min+' : '+sec;
         　  setTimeout('ShowTime()',1000);
             }
-        </script>
+    </script>
+
     <style>
+      /* body{
+        font-family: 'Tangerine', serif;
+
+        } */
+
+
         table{
             width: 100%;
             table-layout: fixed;
@@ -53,9 +63,28 @@
             text-align: center;
             position: relative;
         }
-        td.tdHolidays{
+        td.tdHolidays, td.tdToday{
             padding: 0.35rem 0.25rem 0 0.25rem;
+        }
+        td.tdHolidays{
             box-shadow: inset 0 0 3px 3px #f991cc;             
+        }
+        td.tdHolidays:hover{
+            min-width: 5rem;
+            max-width: 6rem;
+            transform: translateX(10%) scale(2);
+            background: rgba(253, 216, 237, 80%);
+            padding: 0.3rem 0.25rem 0.5rem 0.25rem;
+            border: 1px #dc3545 solid;
+            border-radius: .25rem;
+            box-shadow: none;
+            position: absolute;
+            margin:0 auto;
+            /* display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;    */
+            z-index: 1;       
         }
         .bgMainBlock{
             background: #26647C;
@@ -64,28 +93,21 @@
             background: #fafafa;
         }
         .holidayName{
-            font-size:0.45rem;
-            font-weight: 600;
+            font-family: 'Bebas Neue', cursive;
+            font-size:0.7rem;
+            font-weight: 500;
             color: #dc3545;
-            line-height:0.7rem;
+            line-height:0.85rem;
             margin-bottom:0;
         }
-        .holidayName:hover{
-            width: 6rem;
-            height: 4rem;
-            font-size: 1rem;
-            font-weight: 600;
-            line-height: 1.4rem;
-            transform: translate(-1rem,-2rem);
-            background: rgba(190, 229, 235, 90%);
-            padding: 0.2rem;
-            border: 1px #17a2b8 solid;
-            border-radius: .25rem;
-            position: absolute;
-            display: flex;
-            justify-content: center;
-            align-items: center; 
+        .divToday{
+            color: #ffc107;
+            font-size: 0.6rem;
+            font-weight: 700;
+            background: rgba(220, 239, 239,30%);
+            padding: none;
         }
+
 
         @media(max-width: 575.98px) { 
             .table th, .table td{
@@ -99,11 +121,10 @@
             padding: 0.25rem 0.25rem 0 0.25rem;    
         }
             .holidayName{
-            font-size:0.4rem;
-            font-weight: 500;
+            font-size:0.5rem;
             line-height:0.65rem;
-            margin-bottom:0;
             }
+
         }
         @media (min-width: 576px) and (max-width: 767.98px){
         }
@@ -138,13 +159,13 @@
                 <div class="order-2">
                         <form action="calendar_v2.php" method="get">
                             <div class="form-row d-flex justify-content-center align-items-center">
-                                <div class="input-group order-1 order-md-2 col-12 col-md-3 mt-1">
+                                <div class="input-group order-1 order-md-2 col-12 col-md-3 my-2">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">Year</span>
                                     </div><span class="inputHere"></span>
                                     <input type="text" class="form-control" name="Yr">
                                 </div>
-                                <div class="input-group order-2 order-md-3 col-12 col-md-3 mt-1">
+                                <div class="input-group order-2 order-md-3 col-12 col-md-3 my-2">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">Month</span>
                                     </div>
@@ -164,16 +185,16 @@
                                         <option value="12"> 12 </option>
                                     </select>
                                 </div>
-                                <div class="order-4 order-md-4 col-4 col-md-2 mt-1">
+                                <div class="order-4 order-md-4 col-4 col-md-2 my-2">
                                     <button type="submit" class="btn btn-info col-12">Send</button>
                                 </div>
-                                <div class="order-3 order-md-1 col-4 col-md-1 mr-md-4 mt-1">
+                                <div class="order-3 order-md-1 col-4 col-md-1 mr-md-4 my-2">
                                     <button type="button" class="btn btn-icon-cus col-12"
                                         <?php
                                             if($calMn==1){
                                                 $lastMn=12;
                                                 $lastYr=$calYr-1;
-                                            }elseif($calMn<1){
+                                            }elseif($calMn>1){
                                                 $lastMn=$calMn-1;
                                                 $lastYr=$calYr;
                                             }
@@ -182,7 +203,7 @@
                                         <i class="material-icons">fast_rewind</i>
                                     </button>
                                 </div>
-                                <div class="order-5 col-4 col-md-1 ml-md-4 mt-1">
+                                <div class="order-5 col-4 col-md-1 ml-md-4 my-2">
                                     <button type="button" class="btn btn-icon-cus col-12"
                                         <?php
                                             if($calMn==12){
@@ -216,18 +237,20 @@
                             <tbody class="table bg-white">
                                 <?php                                       
 /*without Mother's Day*/            $holidays=[
-                                        '1-1' => 'New Year\'s Day',
+                                        '1-1' => 'Happy New Year',
                                         '2-14' => 'Valentine\'s Day',
                                         '3-8' => 'Women\'s Day',
                                         '4-11' => 'Pet Day',
                                         '4-22' => 'Earth Day',
                                         '5-1' => 'Labor Day',
                                         '6-8' => 'World Ocean Day',
+                                        '7-6' => 'Happy World Chocolate Day!',
                                         '8-8' => 'Father\'s Day',
                                         '9-28' => 'Teacher\'s Day',
                                         '10-10' => 'National Day',
+                                        '10-31' => 'Happy Halloween!',
                                         '11-11' => 'Shopping Day',
-                                        '12-25' => 'Merry Chrismax']; 
+                                        '12-25' => 'Merry Chrismax!']; 
 
                                     $calDys=date('t',strtotime($calYr.'-'.$calMn.'-1')); 
                                     $firstWkDy=date('w',strtotime($calYr.'-'.$calMn.'-1'));
@@ -237,40 +260,37 @@
                                         echo "<tr>";
                                         for ($j=0; $j<=6; $j++){
                                             $calDate=($i*7)+($j+1)-$firstWkDy;
-/*if() for Holidays*/                   if(!empty($holidays[$calMn.'-'.$calDate])){
-                                                $tdDate=($i*7)+($j+1)-$firstWkDy."<div class='holidayName'>".$holidays["$calMn-$calDate"]."</div>";
+                                            $tdDate=$calDate;
+                                            $tdHolidays="";
+                                            $tdToday="";
+                                            $calToday="";
+/*if() for Holidays*/                       if(!empty($holidays[$calMn.'-'.$calDate])){
+                                                $tdDate=($i*7)+($j+1)-$firstWkDy."<div class='holidayName'>".$holidays[$calMn.'-'.$calDate]."</div>";
                                                 $tdHolidays="tdHolidays";
-                                            }else{
-                                                $tdDate=$calDate;
-                                                $tdHolidays="";
                                             }
-
-
-// /*if() for Mother's Day*/                   if((($i==2 && $firstWkDy>0) or ($i==1 && $firstWkDy==0)) && $j==0 && $calMn==5){
-//                                                 // $tdDate=($i*7)+($j+1)-$firstWkDy.'</br><p style=\'font-size:0.5rem;line-height:0.85rem;margin-bottom:0;\'>Mother\'s Day</p>';
-//                                                 // $tdClass="tdHolidays";
-//                                             } // only for Mother's Day
-
-
-// /*if() for Today*/                          if($calDate==date('d') && $calMn==date('m')){
-//                                                 $tdClassToday="tdToday";
-
-//                                             }
-
-
-/*start to print table tbody*/      if (($i==0 && $j<$firstWkDy) ||($i==ceil(($calDys+$firstWkDy-7)/7) && $j>$endWkDy)) {
+/*if() for Mother's Day*/                   if((($i==2 && $firstWkDy>0) or ($i==1 && $firstWkDy==0)) && $j==0 && $calMn==5){
+                                                $tdDate=($i*7)+($j+1)-$firstWkDy."<div class='holidayName'>Mother's Day</div>";
+                                                $tdHolidays="tdHolidays";
+                                            } // only for Mother's Day
+/*if() for Today*/                          if($calDate==date('d') && $calMn==date('m') && $calYr==date('Y')){
+                                                $calToday="<div class='divToday'>Today</div>";
+                                                $tdToday="tdToday";
+                                            }
+/*start to print table tbody*/              if (($i==0 && $j<$firstWkDy) ||($i==ceil(($calDys+$firstWkDy-7)/7) && $j>$endWkDy)) {
                                                 echo "<td> &nbsp; </td>";
                                             }elseif($j==0){
-                                                echo "<td class='$tdHolidays tdbg text-danger font-weight-bold'>";
+                                                echo "<td class='$tdHolidays $tdToday tdbg text-danger font-weight-bold'>";
                                                 echo $tdDate;
                                                 echo "</td>";
                                             }elseif($j==6){
-                                                echo "<td class='$tdHolidays tdbg text-success font-weight-bold'>";
+                                                echo "<td class='$tdHolidays $tdToday tdbg text-success font-weight-bold'>";
                                                 echo $tdDate;
+                                                echo $calToday;
                                                 echo "</td>";
                                             }else{
-                                                echo "<td class='$tdHolidays tdbg'>";
+                                                echo "<td class='$tdHolidays $tdToday tdbg'>";
                                                 echo $tdDate;
+                                                echo $calToday;
                                                 echo "</td>";
                                             }
                                         }
@@ -317,9 +337,9 @@
                 </div>
                 <?php
                     $pic=str_pad($calMn, 2, '0', STR_PAD_LEFT).'-'.strval(rand(1,2));
-                ?>
-                <img src="300x200/<?=$pic;?>.jpg" class="rounded m-3 d-none d-lg-block">    
-            </div>           
+                    ?>
+                <img src="300x200/<?=$pic;?>.jpg" class="rounded m-3 d-none d-lg-block">
+            </div>
         </div>
     </div>
 </body>
