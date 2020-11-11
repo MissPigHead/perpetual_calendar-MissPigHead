@@ -29,31 +29,62 @@
             text-align: center;
             font-size: 3.2rem;
             font-weight: 700;
+            color: #fff;
         }
         .btn-icon-cus{
-            font-size: 1rem;
-            line-height:1rem;
+            font-size: 2rem;
+            line-height:2rem;
             text-align: center;
             vertical-align: middle;
-            padding: 0.325rem;
+            color: #fff;
+            background: #17a2b8;
+            border-color: #17a2b8;
+            padding: 0.1rem;
         }
 
         .table th{
             text-align: center;
+            background: #75cbd9;
+            border: 0;
         }
         .table td{
-            padding: 0.25rem 0.25rem 1.3rem 0.25rem;
-            text-align: center;
+            padding: 0.35rem 0.25rem 2rem 0.25rem;
             border-top: 0;
+            text-align: center;
+            position: relative;
         }
         td.tdHolidays{
-            padding: 0.25rem 0.25rem 0 0.25rem;            
+            padding: 0.35rem 0.25rem 0 0.25rem;
+            box-shadow: inset 0 0 3px 3px #f991cc;             
         }
         .bgMainBlock{
-            background: #D4E5E3;
+            background: #26647C;
         }
         .bgSecBlock{
-            background: #f5f5f5;
+            background: #fafafa;
+        }
+        .holidayName{
+            font-size:0.45rem;
+            font-weight: 600;
+            color: #dc3545;
+            line-height:0.7rem;
+            margin-bottom:0;
+        }
+        .holidayName:hover{
+            width: 6rem;
+            height: 4rem;
+            font-size: 1rem;
+            font-weight: 600;
+            line-height: 1.4rem;
+            transform: translate(-1rem,-2rem);
+            background: rgba(190, 229, 235, 90%);
+            padding: 0.2rem;
+            border: 1px #17a2b8 solid;
+            border-radius: .25rem;
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center; 
         }
 
         @media(max-width: 575.98px) { 
@@ -62,8 +93,16 @@
                 padding: 0.25rem;
             }
             .table td{
-                font-size: 0.85rem;
-                padding: 0.25rem 0.25rem 1rem 0.25rem;
+                padding: 0.25rem 0.25rem 2rem 0.25rem;
+            }
+            td.tdHolidays{
+            padding: 0.25rem 0.25rem 0 0.25rem;    
+        }
+            .holidayName{
+            font-size:0.4rem;
+            font-weight: 500;
+            line-height:0.65rem;
+            margin-bottom:0;
             }
         }
         @media (min-width: 576px) and (max-width: 767.98px){
@@ -94,19 +133,18 @@
         $calMnF=date('F',strtotime($calYr.'-'.$calMn.'-1'));
         ?>
     <div class="container">
-        <div class="row mt-md-5 d-flex justify-content-center">
-            <div class="col-12 col-lg-8 order-2 order-lg-1">
-                <div class="card bgMainBlock">
-                    <div class="card-body order-2">
+        <div class="row my-sm-3 my-lg-5 d-flex justify-content-center">
+            <div class="card bgMainBlock col-12 col-lg-8 order-2 order-lg-1 align-self-stretch">
+                <div class="order-2">
                         <form action="calendar_v2.php" method="get">
                             <div class="form-row d-flex justify-content-center align-items-center">
-                                <div class="input-group order-1 order-md-2 col-12 col-md-3">
+                                <div class="input-group order-1 order-md-2 col-12 col-md-3 mt-1">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">Year</span>
                                     </div><span class="inputHere"></span>
                                     <input type="text" class="form-control" name="Yr">
                                 </div>
-                                <div class="input-group order-2 order-md-3 col-12 col-md-3">
+                                <div class="input-group order-2 order-md-3 col-12 col-md-3 mt-1">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">Month</span>
                                     </div>
@@ -126,11 +164,11 @@
                                         <option value="12"> 12 </option>
                                     </select>
                                 </div>
-                                <div class="order-3 order-md-4 col-12 col-md-2">
-                                    <button type="submit" class="btn btn-primary col-12">Send</button>
+                                <div class="order-4 order-md-4 col-4 col-md-2 mt-1">
+                                    <button type="submit" class="btn btn-info col-12">Send</button>
                                 </div>
-                                <div class="order-4 order-md-1 col-6 col-md-1 mr-md-3">
-                                    <button type="button" class="btn table-info btn-icon-cus col-12"
+                                <div class="order-3 order-md-1 col-4 col-md-1 mr-md-4 mt-1">
+                                    <button type="button" class="btn btn-icon-cus col-12"
                                         <?php
                                             if($calMn==1){
                                                 $lastMn=12;
@@ -144,8 +182,8 @@
                                         <i class="material-icons">fast_rewind</i>
                                     </button>
                                 </div>
-                                <div class="order-5 col-6 col-md-1 ml-md-3">
-                                    <button type="button" class="btn btn-info btn-icon-cus col-12"
+                                <div class="order-5 col-4 col-md-1 ml-md-4 mt-1">
+                                    <button type="button" class="btn btn-icon-cus col-12"
                                         <?php
                                             if($calMn==12){
                                                 $nextMn=1;
@@ -161,24 +199,21 @@
                                 </div>
                             </div>
                         </form>
-                    </div>
-                    <div class="card-body order-1">
-                        <h1 class="h1XL"><?=$calYr.'&nbsp;&nbsp;'.$calMnF?></h1>
-                    </div>
-                    <div class="card-body order-3">
+
+                    <div class="m-md-3">
                         <table class="table">
                             <thead>
-                                <tr class="table-info">
+                                <tr>
                                     <th class="text-danger">Sun</th>
                                     <th>Mon</th>
                                     <th>Tue</th>
                                     <th>Wed</th>
                                     <th>Thur</th>
                                     <th>Fri</th>
-                                    <th class="text-danger">Sat</th>
+                                    <th class="text-success">Sat</th>
                                 </tr>
                             </thead>
-                            <tbody  class="table bg-white">
+                            <tbody class="table bg-white">
                                 <?php                                       
 /*without Mother's Day*/            $holidays=[
                                         '1-1' => 'New Year\'s Day',
@@ -202,32 +237,39 @@
                                         echo "<tr>";
                                         for ($j=0; $j<=6; $j++){
                                             $calDate=($i*7)+($j+1)-$firstWkDy;
-/*if() for Holidays*/                   if(isset($holidays[$calMn.'-'.$calDate])){
-                                                
-                                                $tdDate=($i*7)+($j+1)-$firstWkDy.'</br><p style=\'font-size:0.5rem;line-height:0.85rem;margin-bottom:0;\'>'.$holidays["$calMn-$calDate"].'</p>';
-                                                $tdClass="tdHolidays";
+/*if() for Holidays*/                   if(!empty($holidays[$calMn.'-'.$calDate])){
+                                                $tdDate=($i*7)+($j+1)-$firstWkDy."<div class='holidayName'>".$holidays["$calMn-$calDate"]."</div>";
+                                                $tdHolidays="tdHolidays";
                                             }else{
                                                 $tdDate=$calDate;
-                                                $tdClass="";
+                                                $tdHolidays="";
                                             }
-/*if() for Mother's Day*/                   if((($i==2 && $firstWkDy>0) or ($i==1 && $firstWkDy==0)) && $j==0 && $calMn==5){
-                                                $tdDate=($i*7)+($j+1)-$firstWkDy.'</br><p style=\'font-size:0.5rem;line-height:0.85rem;margin-bottom:0;\'>Mother\'s Day</p>';
-                                                $tdClass="tdHolidays";
-                                            } // only for Mother's Day
-/*if() for Today*/                          if($calDate==date('d') && $calMn==date('m')){
-                                                $tdClassToday="tdToday";
-                                            }
-                                            else{$tdClassToday="";}
+
+
+// /*if() for Mother's Day*/                   if((($i==2 && $firstWkDy>0) or ($i==1 && $firstWkDy==0)) && $j==0 && $calMn==5){
+//                                                 // $tdDate=($i*7)+($j+1)-$firstWkDy.'</br><p style=\'font-size:0.5rem;line-height:0.85rem;margin-bottom:0;\'>Mother\'s Day</p>';
+//                                                 // $tdClass="tdHolidays";
+//                                             } // only for Mother's Day
+
+
+// /*if() for Today*/                          if($calDate==date('d') && $calMn==date('m')){
+//                                                 $tdClassToday="tdToday";
+
+//                                             }
 
 
 /*start to print table tbody*/      if (($i==0 && $j<$firstWkDy) ||($i==ceil(($calDys+$firstWkDy-7)/7) && $j>$endWkDy)) {
                                                 echo "<td> &nbsp; </td>";
-                                            }elseif($j==0||$j==6){
-                                                echo "<td class=\"text-danger $tdClass $tdClassToday font-weight-bold tdbg\">";
+                                            }elseif($j==0){
+                                                echo "<td class='$tdHolidays tdbg text-danger font-weight-bold'>";
+                                                echo $tdDate;
+                                                echo "</td>";
+                                            }elseif($j==6){
+                                                echo "<td class='$tdHolidays tdbg text-success font-weight-bold'>";
                                                 echo $tdDate;
                                                 echo "</td>";
                                             }else{
-                                                echo "<td class='tdbg $tdClass $tdClassToday'>";
+                                                echo "<td class='$tdHolidays tdbg'>";
                                                 echo $tdDate;
                                                 echo "</td>";
                                             }
@@ -239,11 +281,44 @@
                         </table>
                     </div>
                 </div>
-            </div>
-            <div class="col-12 col-lg-4 order-1 order-lg-2">
-                <div class="card">
-                    <img src="300x200/12-2.jpg" class="rounded">    
+                <div class="card-body order-1">
+                    <h1 class="h1XL"><?=$calYr.'&nbsp;&nbsp;'.$calMnF?></h1>
                 </div>
+            </div>
+            <div class="card bgSecBloack col-12 col-lg-4 order-1 order-lg-2 align-self-stretch d-flex justify-content-between align-items-center">
+                <h1 class="card-body text-warning"  id="Time"></h1>
+                <div class="card-body text-info">
+                    <div class="nav nav-tabs" id="myTab" role="tablist">
+                        <div class="nav-item" role="presentation">
+                            <a class="nav-link" id="motto-tab" data-toggle="tab" href="#motto" role="tab" aria-controls="home" aria-selected="true">Want some food for thought?</a>
+                        </div>
+                    </div>
+                    <div class="tab-content">
+                        <div class="tab-pane" id="motto" role="tabpanel" aria-labelledby="motto-tab">
+                            <?php
+                                $dsn="mysql:host=localhost;dbname=motto;charset=utf8";
+                                $pdo= new PDO($dsn,'root','');
+
+                                $mottos=$pdo -> query("select * from motto") -> fetchAll(PDO::FETCH_NUM);
+                                $saying[]='';
+                                $person[]='';
+                                foreach ($mottos as $motto){
+                                    $saying[]=$motto['1'];
+                                    $person[]=$motto['2'];
+                                }
+                                $randNum=rand(1,50);
+                                ?>
+                            <blockquote class="blockquote">
+                                <p class="mb-0"><?= $saying[$randNum];?></p>
+                                <footer class="blockquote-footer text-right"><cite title="Source Title"><?= $person[$randNum];?></cite></footer>
+                            </blockquote>
+                        </div>
+                    </div>
+                </div>
+                <?php
+                    $pic=str_pad($calMn, 2, '0', STR_PAD_LEFT).'-'.strval(rand(1,2));
+                ?>
+                <img src="300x200/<?=$pic;?>.jpg" class="rounded m-3 d-none d-lg-block">    
             </div>           
         </div>
     </div>
