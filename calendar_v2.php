@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perpetual Calendar</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Ubuntu:wght@700&display=swap" rel="stylesheet">
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
@@ -21,25 +22,21 @@
             document.getElementById('Time').innerHTML = hr+' : '+min+' : '+sec;
         　  setTimeout('ShowTime()',1000);
             }
-    </script>
-
+        </script>
     <style>
-      /* body{
-        font-family: 'Tangerine', serif;
-
-        } */
-
-
         table{
             width: 100%;
             table-layout: fixed;
             border-spacing: 0;
         }
         .h1XL{
-            text-align: center;
+            font-family: 'Ubuntu', sans-serif;
             font-size: 3.2rem;
-            font-weight: 700;
             color: #fff;
+        }
+        .clock{
+            font-family: 'Ubuntu', sans-serif;
+            font-size: 2.5rem;            
         }
         .btn-icon-cus{
             font-size: 2rem;
@@ -80,18 +77,9 @@
             box-shadow: none;
             position: absolute;
             margin:0 auto;
-            /* display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;    */
             z-index: 1;       
         }
-        .bgMainBlock{
-            background: #26647C;
-        }
-        .bgSecBlock{
-            background: #fafafa;
-        }
+
         .holidayName{
             font-family: 'Bebas Neue', cursive;
             font-size:0.7rem;
@@ -101,13 +89,19 @@
             margin-bottom:0;
         }
         .divToday{
+            font-family: 'Ubuntu', sans-serif;
             color: #ffc107;
             font-size: 0.6rem;
             font-weight: 700;
             background: rgba(220, 239, 239,30%);
             padding: none;
         }
-
+        .bgMainBlock{
+            background: #26647C;
+        }
+        .bgSecBlock{
+            background: rgb(220, 239, 239);
+        }
 
         @media(max-width: 575.98px) { 
             .table th, .table td{
@@ -119,10 +113,19 @@
             }
             td.tdHolidays{
             padding: 0.25rem 0.25rem 0 0.25rem;    
-        }
+            }
             .holidayName{
             font-size:0.5rem;
             line-height:0.65rem;
+            }
+            .h1XL{
+            font-family: 'Ubuntu', sans-serif;
+            font-size: 2.8rem;
+            color: #fff;
+            }
+            .clock{
+            font-family: 'Ubuntu', sans-serif;
+            font-size: 2.2rem;            
             }
 
         }
@@ -130,13 +133,6 @@
         }
         @media (min-width: 992px) and (max-width: 1199.98px) {
         } 
-
-        /* .inputHere::after:hover{   這段不會寫......
-            content: 'please input';
-            color: #f00;
-            position: relative;
-            float: right;
-        } */
     </style>
 </head>
 <body onload="ShowTime()">
@@ -163,7 +159,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">Year</span>
                                     </div><span class="inputHere"></span>
-                                    <input type="text" class="form-control" name="Yr">
+                                    <input type="number" min="0" max="10000" class="form-control" name="Yr" value="<?= $calYr;?>">
                                 </div>
                                 <div class="input-group order-2 order-md-3 col-12 col-md-3 my-2">
                                     <div class="input-group-prepend">
@@ -220,7 +216,6 @@
                                 </div>
                             </div>
                         </form>
-
                     <div class="m-md-3">
                         <table class="table">
                             <thead>
@@ -237,7 +232,7 @@
                             <tbody class="table bg-white">
                                 <?php                                       
 /*without Mother's Day*/            $holidays=[
-                                        '1-1' => 'Happy New Year',
+                                        '1-1' => 'Happy New Year!',
                                         '2-14' => 'Valentine\'s Day',
                                         '3-8' => 'Women\'s Day',
                                         '4-11' => 'Pet Day',
@@ -273,7 +268,7 @@
                                                 $tdHolidays="tdHolidays";
                                             } // only for Mother's Day
 /*if() for Today*/                          if($calDate==date('d') && $calMn==date('m') && $calYr==date('Y')){
-                                                $calToday="<div class='divToday'>Today</div>";
+                                                $calToday="<div class='divToday'>TODAY</div>";
                                                 $tdToday="tdToday";
                                             }
 /*start to print table tbody*/              if (($i==0 && $j<$firstWkDy) ||($i==ceil(($calDys+$firstWkDy-7)/7) && $j>$endWkDy)) {
@@ -301,12 +296,12 @@
                         </table>
                     </div>
                 </div>
-                <div class="card-body order-1">
+                <div class="card-body order-1 text-center">
                     <h1 class="h1XL"><?=$calYr.'&nbsp;&nbsp;'.$calMnF?></h1>
                 </div>
             </div>
-            <div class="card bgSecBloack col-12 col-lg-4 order-1 order-lg-2 align-self-stretch d-flex justify-content-between align-items-center">
-                <h1 class="card-body text-warning"  id="Time"></h1>
+            <div class="card bgSecBlock col-12 col-lg-4 order-1 order-lg-2 align-self-stretch d-flex justify-content-between align-items-center">
+                <p class="card-body text-warning clock"  id="Time"></p>
                 <div class="card-body text-info">
                     <div class="nav nav-tabs" id="myTab" role="tablist">
                         <div class="nav-item" role="presentation">
@@ -335,9 +330,7 @@
                         </div>
                     </div>
                 </div>
-                <?php
-                    $pic=str_pad($calMn, 2, '0', STR_PAD_LEFT).'-'.strval(rand(1,2));
-                    ?>
+                <?php $pic=str_pad($calMn, 2, '0', STR_PAD_LEFT).'-'.strval(rand(1,3)); ?>
                 <img src="300x200/<?=$pic;?>.jpg" class="rounded m-3 d-none d-lg-block">
             </div>
         </div>
