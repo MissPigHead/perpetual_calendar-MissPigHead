@@ -114,7 +114,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text cus">Year</span>
                                     </div>
-                                    <input type="text" class="form-control" name="Yr">
+                                    <input type="number" min="0" max="10000" class="form-control" name="Yr" value="<?= $calYr;?>">
                                 </div>
                             </div> 
                             <div class="order-3 form-group col-md-3 mb-2">                            
@@ -188,8 +188,6 @@
                         </thead>
                         <tbody  class="table bg-white">
                             <?php
-                                    
-                                    
                                     $holidays=[
                                         '1-1' => 'New Year\'s Day',
                                         '2-14' => 'Valentine\'s Day',
@@ -204,12 +202,9 @@
                                         '11-11' => 'Shopping Day',
                                         '12-25' => 'Merry Chrismax'
                                     ]; // 未加母親節
-
-
                                     $calDys=date('t',strtotime($calYr.'-'.$calMn.'-1')); // 原始'該月天數'
                                     $firstWkDy=date('w',strtotime($calYr.'-'.$calMn.'-1'));
                                     $endWkDy=date('w',strtotime($calYr.'-'.$calMn.'-'.$calDys));
-
                                     for ($i=0; $i<=ceil(($calDys+$firstWkDy-7)/7); $i++){
                                         echo "<tr>";
                                         for ($j=0; $j<=6; $j++){
@@ -223,10 +218,9 @@
                                                 $tdDate=$calDate;
                                                 $tdClass="";
                                             }
-
 // if() for Mother's Day
                                             if((($i==2 && $firstWkDy>0) or ($i==1 && $firstWkDy==0)) && $j==0 && $calMn==5){
-                                                $tdDate=($i*7)+($j+1)-$firstWkDy."</br>Mother\'s Day";
+                                                $tdDate=($i*7)+($j+1)-$firstWkDy."</br>Mother's Day";
                                                 $tdClass="tdHolidays";
                                             } // only for Mother's Day
 // if() for today
@@ -249,14 +243,10 @@
                                         echo "</tr>";
                                     }
                                 ?>
-
-
-
                         </tbody>
                     </table>
                 </div>
             </div>
-        
             <div class="mx-1 col-12 col-lg-4 order-1 order-lg-2 card px-2 bg-light text-center align-self-stretch">
                 <div class="card-body d-flex flex-column justify-content-between">
                     <h5 class="text-muted pt-lg-2"><?='Today is '.date('Y / m / d')?></h5>
@@ -266,10 +256,8 @@
                     </div>
                     <div>
                     <h5 class="text-muted py-lg-2 d-none d-md-block"><?php echo $timezone;?></h5>
-                        <?php
-                            $pic=str_pad($calMn, 2, '0', STR_PAD_LEFT).'-'.strval(rand(1,2));
-                        ?>
-                        <img src="images/300x200/<?=$pic;?>.jpg" class="card-img d-none d-lg-block">
+                        <?php $pic=str_pad($calMn, 2, '0', STR_PAD_LEFT).'-'.strval(rand(1,2)); ?>
+                        <img src="images/300x200/<?=$pic;?>.jpg" div class="card-img d-none d-lg-block">
                     </div>
                 </div>
             </div>
