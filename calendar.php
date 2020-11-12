@@ -200,7 +200,7 @@
                                         '9-28' => 'Teacher\'s Day',
                                         '10-10' => 'National Day',
                                         '11-11' => 'Shopping Day',
-                                        '12-25' => 'Merry Chrismax'
+                                        '12-25' => 'Merry Christmas'
                                     ]; // 未加母親節
                                     $calDys=date('t',strtotime($calYr.'-'.$calMn.'-1')); // 原始'該月天數'
                                     $firstWkDy=date('w',strtotime($calYr.'-'.$calMn.'-1'));
