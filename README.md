@@ -1,8 +1,9 @@
 # 萬年曆 RWD  
 -> 繳交calendar_final.php為作品  
--> calendar.php的功能較多，但版面太多資訊，顯亂，保留檔案以後參考功能寫法
+-> calendar_orign.php的功能較多，但版面太多資訊，顯亂，保留檔案以後參考功能寫法
+-> 因為使用git 的rename 功能，造成版本記錄消失...  學經驗！
   
-## --《 calendar.php 》--  
+## --《 calendar_origin.php 》--  
  - bug  (2020/11/11 已修復)
    1. 年份限制輸入正整數，依照炎炎老師建議顯示default值做為引導
    2. Mother's Day 出現跳脫符號，已移除  
@@ -25,7 +26,7 @@
   
 #  
 
-## --《 calendar_v2.php 》--  
+## --《 calendar_final.php 》--  
  - 相較原始版本： 減少重複資訊，避免版面過於繁複
  - 待調整：時間下方格言tab顯示外觀
 ###  > 查詢功能
