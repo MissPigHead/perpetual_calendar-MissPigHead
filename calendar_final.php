@@ -135,7 +135,7 @@
             }
             .h1XL{
             font-family: 'Ubuntu', sans-serif;
-            font-size: 2.8rem;
+            font-size: 2.5rem;
             color: #fff;
             }
             .clock{
@@ -151,6 +151,7 @@
 </head>
 <body onload="ShowTime()">
     <?php
+        date_default_timezone_set("Asia/Taipei");
         if (!empty($_GET['Yr'])){
             $calYr=$_GET['Yr'];
         }else{
