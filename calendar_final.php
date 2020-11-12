@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perpetual Calendar</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Nothing+You+Could+Do&family=Homemade+Apple&family=Caveat:wght@500&family=Bebas+Neue&family=Ubuntu:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500&family=Nanum+Pen+Script&family=Nothing+You+Could+Do&family=Homemade+Apple&family=Caveat:wght@500&family=Bebas+Neue&family=Ubuntu:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -118,6 +118,10 @@
             font-family: 'Homemade Apple', cursive;
             font-size: 0.8rem;
         }
+        .nav .nav-link.active{
+            height: 0.1rem;
+            visibility: hidden;
+        }
         @media(max-width: 575.98px) { 
             .table th, .table td{
                 font-size: 0.85rem;
@@ -126,7 +130,7 @@
             .table td{
                 padding: 0.25rem 0.25rem 2rem 0.25rem;
             }
-            td.tdHolidays{
+            td.tdHolidays, td.tdToday{
             padding: 0.25rem 0.25rem 0 0.25rem;    
             }
             .holidayName{
@@ -142,10 +146,11 @@
             font-family: 'Ubuntu', sans-serif;
             font-size: 2.1rem;            
             }
-
+            .divToday{
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.6rem;
+            padding: 0;
         }
-        .nav-pills .nav-link.active{
-            visibility: hidden;
         }
     </style>
 </head>
@@ -168,13 +173,13 @@
         <div class="row my-sm-3 my-lg-5 d-flex justify-content-center">
             <div class="card bgMainBlock col-12 col-lg-8 order-2 order-lg-1 align-self-stretch">
                 <div class="order-2">
-                        <form action="calendar_v2.php" method="get">
+                        <form action="calendar_final.php" method="get">
                             <div class="form-row d-flex justify-content-center align-items-center">
                                 <div class="input-group order-1 order-md-2 col-12 col-md-3 my-2">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">Year</span>
                                     </div>
-                                    <input type="number" min="0" max="10000" class="form-control" placeholder="type here" name="Yr">
+                                    <input type="number" min="0" max="10000" class="form-control" placeholder="---" name="Yr">
                                 </div>
                                 <div class="input-group order-2 order-md-3 col-12 col-md-3 my-2">
                                     <div class="input-group-prepend">
@@ -210,7 +215,7 @@
                                                 $lastYr=$calYr;
                                             }
                                         ?>
-                                        onclick="location.href='calendar_v2.php?Yr=<?=$lastYr;?>&Mn=<?=$lastMn;?>'">
+                                        onclick="location.href='calendar_final.php?Yr=<?=$lastYr;?>&Mn=<?=$lastMn;?>'">
                                         <i class="material-icons">fast_rewind</i>
                                     </button>
                                 </div>
@@ -225,7 +230,7 @@
                                                 $nextYr=$calYr;
                                             }
                                         ?>
-                                        onclick="location.href='calendar_v2.php?Yr=<?=$nextYr;?>&Mn=<?=$nextMn;?>'">
+                                        onclick="location.href='calendar_final.php?Yr=<?=$nextYr;?>&Mn=<?=$nextMn;?>'">
                                         <i class="material-icons">fast_forward</i>
                                     </button>
                                 </div>
@@ -314,7 +319,7 @@
                 </div>
             </div>
             <div class="card bgSecBlock col-12 col-lg-4 order-1 order-lg-2 align-self-stretch d-flex justify-content-between align-items-center">
-                <span class="card-body text-warning clock mt-lg-2"  id="Time"></span>
+                <span class="card-body text-warning clock mt-lg-2 p-1 pt-3 pt-lg-4"  id="Time"></span>
 
 
 
@@ -328,7 +333,7 @@
                         }
                         $randMotto=rand(0,49);
                     ?>
-                <div class="nav nav-pills mx-3" id="pills-tab" role="tablist">
+                <div class="nav mx-3" id="pills-tab" role="tablist">
                     <div class="nav-item ">
                         <span class="nav-link motto-1" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Want some food for thought?</span>
                     </div>
