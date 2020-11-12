@@ -61,4 +61,5 @@ $motto = array(
   array('id' => '151','saying' => 'You have to believe in yourself . That\'s the secret of success.','person' => 'Charles Chaplin'),
   array('id' => '152','saying' => 'You must be the change you want to see in the world.','person' => 'Gandhi')
 );
+
 ?>
