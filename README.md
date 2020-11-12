@@ -1,6 +1,6 @@
 # 萬年曆 RWD  
 -> 繳交calendar_final.php為作品  
--> calendar_orign.php的功能較多，但版面太多資訊，顯亂，保留檔案以後參考功能寫法
+-> calendar_orign.php的功能較多，但版面太多資訊，顯亂，保留檔案以後參考功能寫法  
 -> 因為使用git 的rename 功能，造成版本記錄消失...  學經驗！
   
 ## --《 calendar_origin.php 》--  
