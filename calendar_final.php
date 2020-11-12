@@ -135,12 +135,12 @@
             }
             .h1XL{
             font-family: 'Ubuntu', sans-serif;
-            font-size: 2.5rem;
+            font-size: 2.4rem;
             color: #fff;
             }
             .clock{
             font-family: 'Ubuntu', sans-serif;
-            font-size: 2.2rem;            
+            font-size: 2.1rem;            
             }
 
         }
@@ -174,7 +174,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">Year</span>
                                     </div>
-                                    <input type="number" min="0" max="10000" class="form-control" placeholder="input" name="Yr">
+                                    <input type="number" min="0" max="10000" class="form-control" placeholder="type here" name="Yr">
                                 </div>
                                 <div class="input-group order-2 order-md-3 col-12 col-md-3 my-2">
                                     <div class="input-group-prepend">
@@ -310,7 +310,7 @@
                     </div>
                 </div>
                 <div class="card-body order-1 text-center">
-                    <h1 class="h1XL"><?=$calYr.'&nbsp;&nbsp;'.$calMnF?></h1>
+                    <h1 class="h1XL"><?=$calYr.'&nbsp;'.$calMnF?></h1>
                 </div>
             </div>
             <div class="card bgSecBlock col-12 col-lg-4 order-1 order-lg-2 align-self-stretch d-flex justify-content-between align-items-center">
