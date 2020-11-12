@@ -179,7 +179,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">Year</span>
                                     </div>
-                                    <input type="number" min="0" max="10000" class="form-control" name="Yr">
+                                    <input type="number" min="0" max="10000" class="form-control" placeholder="input" name="Yr">
                                 </div>
                                 <div class="input-group order-2 order-md-3 col-12 col-md-3 my-2">
                                     <div class="input-group-prepend">
@@ -266,11 +266,9 @@
                                         '10-31' => 'Happy Halloween!',
                                         '11-11' => 'Shopping Day',
                                         '12-25' => 'Merry Chrismax!']; 
-
                                     $calDys=date('t',strtotime($calYr.'-'.$calMn.'-1')); 
                                     $firstWkDy=date('w',strtotime($calYr.'-'.$calMn.'-1'));
                                     $endWkDy=date('w',strtotime($calYr.'-'.$calMn.'-'.$calDys));
-
 /*prepare to print table tbody*/    for ($i=0; $i<=ceil(($calDys+$firstWkDy-7)/7); $i++){
                                         echo "<tr>";
                                         for ($j=0; $j<=6; $j++){
