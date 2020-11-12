@@ -1,5 +1,5 @@
 # 萬年曆 RWD  
--> 繳交calendar_v2.php為作品  
+-> 繳交calendar_final.php為作品  
 -> calendar.php的功能較多，但版面太多資訊，顯亂，保留檔案以後參考功能寫法
   
 ## --《 calendar.php 》--  
