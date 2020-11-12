@@ -51,12 +51,6 @@
             border-color: #17a2b8;
             padding: 0.1rem;
         }
-        .hint::after{
-            content: 'please input';
-            color: rgba(0,5,10,50%);
-            position: absolute;
-            /* z-index: 1; */
-        }
         .table th{
             text-align: center;
             background: #75cbd9;
@@ -108,16 +102,17 @@
             background: #26647C;
         }
         .bgSecBlock{
+            color: #0c5460;;
             background: rgb(220, 239, 239);
         }
         .motto-1{
             font-family: 'Nanum Pen Script', cursive;
             font-size: 1.2rem;
-            background: transparent;
+            color: #007bff;
         }
         .motto-2{
             font-family: 'Caveat', cursive;
-            font-size: 1.6rem;
+            font-size: 1.4rem;
         }
         .motto-3{
             font-family: 'Homemade Apple', cursive;
@@ -152,7 +147,12 @@
         @media (min-width: 576px) and (max-width: 767.98px){
         }
         @media (min-width: 992px) and (max-width: 1199.98px) {
-        } 
+        }
+        .nav-pills .nav-link.active{
+            /* color: #0c5460;
+            background-color: #fff; */
+            visibility: hidden;
+        }
     </style>
 </head>
 <body onload="ShowTime()">
@@ -319,35 +319,35 @@
                 </div>
             </div>
             <div class="card bgSecBlock col-12 col-lg-4 order-1 order-lg-2 align-self-stretch d-flex justify-content-between align-items-center">
-                <p class="card-body text-warning clock mt-lg-2"  id="Time"></p>
+                <span class="card-body text-warning clock mt-lg-2"  id="Time"></span>
 
 
-                <div class="m-2">
-                    <div class="nav nav-tabs" id="myTab" role="tablist">
-                        <div class="nav-item" role="presentation">
-                            <a class="nav-link motto-1" id="motto-tab" data-toggle="tab" href="#motto" role="tab" aria-controls="home" aria-selected="true">Want some food for thought?</a>
-                        </div>
-                    </div>
-                    <div class="tab-content">
-                        <div class="tab-pane" id="motto" role="tabpanel" aria-labelledby="motto-tab">
-                            <blockquote class="blockquote motto-2">
-                                <?php
-/* using DB here*/                  $dsn="mysql:host=localhost;dbname=motto;charset=utf8";
-                                    $pdo= new PDO($dsn,'root','');
-                                    $mottos=$pdo -> query("select * from motto") -> fetchAll(PDO::FETCH_NUM);
-                                    foreach ($mottos as $motto){
-                                        $saying[]=$motto['1'];
-                                        $person[]=$motto['2'];
-                                    }
-                                    $randMotto=rand(0,49);
-                                ?>
-                                <p><?=$saying[$randMotto];?></p>
-                                <footer class="blockquote-footer motto-3 text-right"><cite title="Source Title"><?=$person[$randMotto];?></cite></footer>
-                            </blockquote>
-                        </div>
+
+                    <?php /* random motto: use mysql to replace long array */
+                        $dsn="mysql:host=localhost;dbname=motto;charset=utf8";
+                        $pdo= new PDO($dsn,'root','');
+                        $mottos=$pdo -> query("select * from motto") -> fetchAll(PDO::FETCH_NUM);
+                        foreach ($mottos as $motto){
+                            $saying[]=$motto['1'];
+                            $person[]=$motto['2'];
+                        }
+                        $randMotto=rand(0,49);
+                    ?>
+                <div class="nav nav-pills mx-3" id="pills-tab" role="tablist">
+                    <div class="nav-item ">
+                        <span class="nav-link motto-1" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Want some food for thought?</span>
                     </div>
                 </div>
-                <?php $pic=str_pad($calMn, 2, '0', STR_PAD_LEFT).'-'.strval(rand(1,2));?>
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                        <span class="motto-2"><?=$saying[$randMotto];?></span>
+                        <blockquote class="blockquote motto-2">
+                            <footer class="blockquote-footer motto-3 text-right"><cite title="Source Title"><?=$person[$randMotto];?></cite></footer>
+                        </blockquote>
+                    </div>
+                </div>
+                
+                <?php $pic=str_pad($calMn, 2, '0', STR_PAD_LEFT).'-'.strval(rand(1,2)); /* random pic for every month */?> 
                 <img src="images/300x200/<?=$pic;?>.jpg" class="rounded m-3 d-none d-lg-block">
             </div>
         </div>
