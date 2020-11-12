@@ -26,7 +26,7 @@
             background-attachment: fixed;
             background-position: center;
             background-size: cover;
-            }
+        }
         table{
             width: 100%;
             table-layout: fixed;
@@ -66,17 +66,17 @@
             padding: 0.35rem 0.25rem 0 0.25rem;
         }
         td.tdHolidays{
-            box-shadow: inset 0 0 3px 3px #f991cc;             
+            box-shadow: inset 0 0 10px 3px #E694AC;             
         }
         td.tdHolidays:hover{
             min-width: 5rem;
             max-width: 6rem;
             transform: translateX(10%) scale(2);
-            background: rgba(253, 216, 237, 80%);
+            background: rgba(240, 150, 150, 70%);
             padding: 0.3rem 0.25rem 0.5rem 0.25rem;
-            border: 1px #dc3545 solid;
-            border-radius: .25rem;
-            box-shadow: none;
+            /* border: 1px #dc3545 solid; */
+            border-radius: .2rem;
+            box-shadow: inset 0 0 10px 0px #E05A5A;
             position: absolute;
             margin:0 auto;
             z-index: 1;       
@@ -144,19 +144,13 @@
             }
 
         }
-        @media (min-width: 576px) and (max-width: 767.98px){
-        }
-        @media (min-width: 992px) and (max-width: 1199.98px) {
-        }
         .nav-pills .nav-link.active{
-            /* color: #0c5460;
-            background-color: #fff; */
             visibility: hidden;
         }
     </style>
 </head>
 <body onload="ShowTime()">
-<?php
+    <?php
         if (!empty($_GET['Yr'])){
             $calYr=$_GET['Yr'];
         }else{
@@ -265,7 +259,7 @@
                                         '10-10' => 'National Day',
                                         '10-31' => 'Happy Halloween!',
                                         '11-11' => 'Shopping Day',
-                                        '12-25' => 'Merry Chrismax!']; 
+                                        '12-25' => 'Merry Christmas!']; 
                                     $calDys=date('t',strtotime($calYr.'-'.$calMn.'-1')); 
                                     $firstWkDy=date('w',strtotime($calYr.'-'.$calMn.'-1'));
                                     $endWkDy=date('w',strtotime($calYr.'-'.$calMn.'-'.$calDys));
