@@ -346,9 +346,25 @@
                                 // $randNum=rand(1,50);
                                 ?>
                             <blockquote class="blockquote motto-2">
-                                <p>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo, sunt.</p>
-                                <footer class="blockquote-footer motto-3 text-right"><cite title="Source Title">TestOne</cite></footer>
+                                <?php
+                                    $dsn="mysql:host=localhost;dbname=motto;charset=utf8";
+                                    $pdo= new PDO($dsn,'root','');
+                                    
+                                    $mottos= $pdo -> query("select * from motto") -> fetchAll();
+                                    $saying[]='';
+                                    $person[]='';
+
+                                    foreach($mottos as $motto){
+                                        $saying[]=$motto['1'];
+                                        $person[]=$motto['2'];
+                                    }
+
+                                    $randMotto=rand(1,50);
+                                    $sayingMotto=$saying[$randMotto];
+                                    $personMotto=$person[$randMotto];
+                                ?>
+                                <p><?=$sayingMotto;?></p>
+                                <footer class="blockquote-footer motto-3 text-right"><cite title="Source Title"><?=$personMotto;?></cite></footer>
                             </blockquote>
                         </div>
                     </div>
